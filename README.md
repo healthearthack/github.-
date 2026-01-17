@@ -152,3 +152,56 @@ If you completed the optional exercises, watch the wrap-up video. The wrap-up vi
     display_dogs function -> display_plates
     remove_dog function -> remove_plates
     run function with menu -> run function with menu
+
+# Planning 
+High-level plan (this is what you’d write before coding)
+
+## Main loop
+
+Print menu
+
+Ask user for choice
+
+Call the appropriate function
+
+Repeat until exit
+
+## Add plate
+
+Ask for plate size
+
+Convert input to int
+
+If <= 0 → error
+
+If stack empty → append
+
+Else:
+
+Compare with top plate
+
+If larger → reject
+
+Else → append
+
+## Print plates
+
+If stack empty → message
+
+Else:
+
+Print from top to bottom
+
+Optionally render visually
+
+## Remove plates
+
+Ask how many to remove
+
+Convert to int
+
+If <= 0 → error
+
+If greater than stack length → error
+
+Else → remove using loop or slicing
