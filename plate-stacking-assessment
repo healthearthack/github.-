@@ -1,0 +1,125 @@
+# List that represents stack of plates where top of stack is end of list.
+plates: list[int] = []
+
+# Ensure user input is an integer value.
+def read_required_int(prompt: str) -> int:
+    
+    # Loop until user provides a non-empty input.
+    while True:
+        
+        # Get value of value variable from user input.
+        value = input(prompt).strip()
+
+        # Check if value has no user input value, that value is empty True response states what is required.
+        if not value:
+            print("Uh-oh, a value is required.")
+            continue
+
+        # Otherwise,
+        try:
+           
+            # Value is user's input, ensure value exists as an integer and return it.
+            return int(value)
+        
+        # Handle non-integer user input in case ValueError occurs for alphabetic or special character entry.
+        except ValueError:
+            print("Invalid input! Please enter numbers only in this activity.")
+
+# Adding plates to stack excluding 0 and negative size inputs
+def add_plate():
+    # Acquire plate size from user and make sure size is an integer.
+    size = read_required_int("Enter a plate size: ")
+
+    # Prevent a 0 or negative size plate.
+    if size <= 0:
+        print("Plate size must be a positive integer.")
+        return
+
+    # Enforce rule cannot place a larger plate on top of a smaller plate.
+    if plates and size > plates[-1]: # plates[-1] is top plate size.
+        print(
+            f"Cannot place a plate of size {size} "
+            f"on top of another plate of size {plates[-1]}."
+        )
+        return
+        
+    # Allow valid sizes to be added to plate stack.
+    plates.append(size)
+    print(f"Success, plate {size} added!")
+
+# Displaying plates added in stack.
+def display_plates():
+    
+    # When no plates exist in stack, display message to user.
+    if not plates:
+        print("There are no stacked plates.")
+        return
+
+    # Print plates from top (last in list) to bottom (first in list).
+    for plate in reversed(plates):
+        print("#" * plate)
+
+# Removing multiple plates from top of stack.
+def remove_plates():
+
+    # Ask user how many plates to remove.
+    quantity = read_required_int("How many plates to remove?: ")
+
+    # Must have at least one plate to remove.
+    if quantity <= 0:
+        print("You must remove at least one plate here.")
+        return
+
+    # Cannot remove more plates than exist in stack.
+    if quantity > len(plates):
+        print(
+            f"Cannot remove more than {len(plates)} plate/s. "
+            f"You chose {quantity}."
+            )
+        return
+
+    # Remove plates from top of stack, smallest plates removed first.
+    for _ in range(quantity):
+        plates.pop()
+
+    print(f"Success, {quantity} plates removed!")
+
+# Function: run() definition.
+def run():
+    # Welcome message program header.
+    print("==================================")
+    print("==================================")
+    print("========Plate Stack Program=======")
+    print("==================================")
+    print("====Build & manage plate stack====")
+    print("==================================")
+    print("==================================")
+    
+    # Main menu loop for multiple actions.
+    while True:
+        print("Plate stack menu")
+        print("==================================")
+        print("[0] Exit")
+        print("[1] Add a plate")
+        print("[2] Display plates")
+        print("[3] Remove plates")
+
+        # User input for menu choice.
+        option = read_required_int("Select [0-3]: ")
+
+        # Menu choices to activate functions.
+        if option == 0:
+            print("Goodbye!")
+            break
+        elif option == 1:
+            add_plate()
+        elif option == 2:
+            display_plates()
+        elif option == 3:
+            remove_plates()
+        else:
+            print("Uh-oh, invalid selection. Please enter valid menu options only.")
+
+# When this is run, have a function start the program.
+# if __name__ == "__plate-stacking-assessment__": Where __name__ imports "filename" from another file. If single file, "__main__".
+run()
