@@ -1,5 +1,7 @@
 # Development Summary (STAR Method)
 
+## More current work is building a feedback loop to github and appreciate it
+
 ## Situation
 
 I was given one week to create a Python program that manages a stack of plates under specific constraints.
